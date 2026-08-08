@@ -105,51 +105,69 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card accentColor={category.color} className="space-y-4">
-            <div className="flex items-center justify-between">
-              <Badge categorySlug={category.slug}>{category.name}</Badge>
-              <span className="text-xs text-slate-400 flex items-center gap-1">
-                <PlayCircle className="h-3.5 w-3.5 text-cyan-400" /> Simulation Available
-              </span>
-            </div>
+          <Link href={`/${category.slug}/`} className="group block">
+            <Card
+              accentColor={category.color}
+              className="space-y-4 h-full flex flex-col justify-between group-hover:border-slate-700/80 transition-all duration-300"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <Badge categorySlug={category.slug}>{category.name}</Badge>
+                  <span className="text-xs text-slate-400 flex items-center gap-1">
+                    <PlayCircle className="h-3.5 w-3.5 text-cyan-400" /> Simulation Available
+                  </span>
+                </div>
 
-            <div className="space-y-2">
-              <h3 className="text-lg font-bold text-white hover:text-cyan-300 transition-colors">
-                Understanding {category.name}: Core Principles & Experiments
-              </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Step-by-step visual exploration with real-time interactive parameters. Change values and observe the behavior live.
-              </p>
-            </div>
+                <div className="space-y-2">
+                  <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    Understanding {category.name}: Core Principles & Experiments
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Step-by-step visual exploration with real-time interactive parameters. Change values and observe the behavior live.
+                  </p>
+                </div>
+              </div>
 
-            <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
-              <span>Read time: 5-8 min</span>
-              <span className="text-cyan-400 font-medium">Explore Article →</span>
-            </div>
-          </Card>
+              <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
+                <span>Read time: 5-8 min</span>
+                <span className="text-cyan-400 font-medium group-hover:underline flex items-center gap-1">
+                  Explore Article →
+                </span>
+              </div>
+            </Card>
+          </Link>
 
-          <Card accentColor={category.color} className="space-y-4">
-            <div className="flex items-center justify-between">
-              <Badge categorySlug={category.slug}>{category.name}</Badge>
-              <span className="text-xs text-slate-400 flex items-center gap-1">
-                <Sparkles className="h-3.5 w-3.5 text-amber-400" /> Visual Guide
-              </span>
-            </div>
+          <Link href={`/${category.slug}/`} className="group block">
+            <Card
+              accentColor={category.color}
+              className="space-y-4 h-full flex flex-col justify-between group-hover:border-slate-700/80 transition-all duration-300"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <Badge categorySlug={category.slug}>{category.name}</Badge>
+                  <span className="text-xs text-slate-400 flex items-center gap-1">
+                    <Sparkles className="h-3.5 w-3.5 text-amber-400" /> Visual Guide
+                  </span>
+                </div>
 
-            <div className="space-y-2">
-              <h3 className="text-lg font-bold text-white hover:text-cyan-300 transition-colors">
-                Mathematical & Physical Foundations of {category.name}
-              </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Intuitive mental models paired with rigorous mathematical equations rendered cleanly in KaTeX.
-              </p>
-            </div>
+                <div className="space-y-2">
+                  <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    Mathematical & Physical Foundations of {category.name}
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Intuitive mental models paired with rigorous mathematical equations rendered cleanly in KaTeX.
+                  </p>
+                </div>
+              </div>
 
-            <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
-              <span>Read time: 6 min</span>
-              <span className="text-cyan-400 font-medium">Explore Article →</span>
-            </div>
-          </Card>
+              <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
+                <span>Read time: 6 min</span>
+                <span className="text-cyan-400 font-medium group-hover:underline flex items-center gap-1">
+                  Explore Article →
+                </span>
+              </div>
+            </Card>
+          </Link>
         </div>
       </div>
     </div>
