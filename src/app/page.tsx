@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CategoryNav } from "@/components/layout/CategoryNav";
+import { OrbitalMotionDemo } from "@/components/simulation/OrbitalMotionDemo";
 import {
   Rocket,
   Atom,
@@ -87,7 +88,7 @@ export default function HomePage() {
             const Icon = ICON_MAP[category.iconName] || Rocket;
 
             return (
-              <Link key={category.slug} href={`/${category.slug}/`} className="group">
+              <Link key={category.slug} href={`/${category.slug}/`} className="group block">
                 <Card
                   accentColor={category.color}
                   className="h-full flex flex-col justify-between group-hover:border-slate-700/80 transition-all duration-300"
@@ -159,23 +160,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Visual Demo Card Stub */}
-            <div className="rounded-2xl bg-slate-950/80 border border-slate-800/80 p-6 flex flex-col items-center justify-center min-h-[260px] text-center space-y-4 shadow-2xl">
-              <div className="relative flex items-center justify-center h-32 w-32 rounded-full border border-cyan-500/20 bg-cyan-500/5">
-                {/* Earth center */}
-                <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 shadow-lg shadow-cyan-500/50 flex items-center justify-center text-[10px] font-bold text-white">
-                  Earth
-                </div>
-                {/* Orbit ring */}
-                <div className="absolute h-28 w-28 rounded-full border border-dashed border-cyan-400/40 animate-spin" style={{ animationDuration: "12s" }}>
-                  <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 h-3.5 w-3.5 rounded-full bg-slate-200 shadow-md shadow-slate-100" />
-                </div>
-              </div>
-              <div className="space-y-1">
-                <p className="text-xs font-semibold text-cyan-400">Interactive Simulation Ready</p>
-                <p className="text-xs text-slate-400">Adjust orbital velocity and observe trajectory</p>
-              </div>
-            </div>
+            {/* Interactive Orbital Motion Demo */}
+            <OrbitalMotionDemo />
           </div>
         </div>
       </section>

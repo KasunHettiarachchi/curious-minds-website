@@ -19,11 +19,18 @@ const ICON_MAP: Record<string, React.ElementType> = {
 
 export function CategoryNav({ activeSlug, className }: CategoryNavProps) {
   return (
-    <div className={cn("flex flex-wrap items-center gap-2", className)}>
+    <nav
+      aria-label="Category tabs"
+      className={cn(
+        "flex items-center gap-2 overflow-x-auto max-w-full pb-2 scrollbar-none sm:pb-0 sm:flex-wrap",
+        className
+      )}
+    >
       <Link
         href="/"
+        aria-current={!activeSlug ? "page" : undefined}
         className={cn(
-          "inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border",
+          "inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border whitespace-nowrap shrink-0",
           !activeSlug
             ? "bg-slate-800 text-white border-slate-700 shadow-sm"
             : "bg-slate-900/60 text-slate-400 border-slate-800 hover:text-white hover:border-slate-700"
@@ -41,8 +48,9 @@ export function CategoryNav({ activeSlug, className }: CategoryNavProps) {
           <Link
             key={cat.slug}
             href={`/${cat.slug}/`}
+            aria-current={isActive ? "page" : undefined}
             className={cn(
-              "inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border",
+              "inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border whitespace-nowrap shrink-0",
               isActive
                 ? "bg-slate-800 text-white border-slate-700 shadow-sm"
                 : "bg-slate-900/60 text-slate-400 border-slate-800 hover:text-white hover:border-slate-700"
@@ -56,6 +64,6 @@ export function CategoryNav({ activeSlug, className }: CategoryNavProps) {
           </Link>
         );
       })}
-    </div>
+    </nav>
   );
 }
