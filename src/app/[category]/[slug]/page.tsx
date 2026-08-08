@@ -7,10 +7,19 @@ import { CATEGORY_MAP } from "@/data/categories";
 import { CategorySlug } from "@/types";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+
+// Simulation components
 import { OrbitalMotionDemo } from "@/components/simulation/OrbitalMotionDemo";
+import { SolarSystemScaleDemo } from "@/components/simulation/SolarSystemScaleDemo";
 import { ProjectileMotionDemo } from "@/components/simulation/ProjectileMotionDemo";
+import { TimeDilationDemo } from "@/components/simulation/TimeDilationDemo";
+import { PiEstimatorDemo } from "@/components/simulation/PiEstimatorDemo";
+import { FractalVisualizerDemo } from "@/components/simulation/FractalVisualizerDemo";
 import { SortingVisualizerDemo } from "@/components/simulation/SortingVisualizerDemo";
+import { BinarySearchDemo } from "@/components/simulation/BinarySearchDemo";
+import { PredatorPreyDemo } from "@/components/simulation/PredatorPreyDemo";
+import { FibonacciSpiralDemo } from "@/components/simulation/FibonacciSpiralDemo";
+
 import {
   ArrowLeft,
   BookOpen,
@@ -23,6 +32,10 @@ import {
   Atom,
   ExternalLink,
   CheckCircle2,
+  History,
+  Lightbulb,
+  Globe,
+  AlertTriangle,
 } from "lucide-react";
 
 interface ArticlePageProps {
@@ -107,11 +120,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <header className="space-y-6">
         <div className="flex flex-wrap items-center gap-3">
           <Badge categorySlug={category.slug}>{category.name}</Badge>
-          {article.hasSimulation && (
-            <Badge variant="interactive" className="gap-1">
-              <Sparkles className="h-3 w-3 text-cyan-400" /> Interactive Simulation Included
-            </Badge>
-          )}
+          <Badge variant="interactive" className="gap-1">
+            <Sparkles className="h-3 w-3 text-cyan-400" /> Interactive Simulation
+          </Badge>
         </div>
 
         <div className="space-y-3">
@@ -148,10 +159,32 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </p>
       </section>
 
+      {/* Historical Context Section */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-white font-display flex items-center gap-2 border-b border-slate-800 pb-2">
+          <History className="h-5 w-5 text-indigo-400" />
+          <span>Historical Discovery & Background</span>
+        </h2>
+        <p className="text-slate-300 text-base leading-relaxed">
+          {article.historicalContext}
+        </p>
+      </section>
+
+      {/* Theoretical Principles */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-white font-display flex items-center gap-2 border-b border-slate-800 pb-2">
+          <Lightbulb className="h-5 w-5 text-amber-400" />
+          <span>Theoretical Principles & Mechanism</span>
+        </h2>
+        <p className="text-slate-300 text-base leading-relaxed">
+          {article.theoreticalPrinciples}
+        </p>
+      </section>
+
       {/* Intuitive Mental Model Section */}
       <section className="space-y-4">
         <h2 className="text-2xl font-bold text-white font-display flex items-center gap-2 border-b border-slate-800 pb-2">
-          <Brain className="h-5 w-5 text-amber-400" />
+          <Brain className="h-5 w-5 text-cyan-400" />
           <span>Intuitive Mental Model</span>
         </h2>
         <p className="text-slate-300 text-base leading-relaxed">
@@ -159,32 +192,59 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </p>
       </section>
 
-      {/* Interactive Simulation Container (if applicable) */}
-      {article.hasSimulation && (
-        <section className="space-y-4 pt-2">
-          <h2 className="text-2xl font-bold text-white font-display flex items-center gap-2 border-b border-slate-800 pb-2">
-            <Sparkles className="h-5 w-5 text-cyan-400" />
-            <span>Interactive Experimentation</span>
-          </h2>
-          <p className="text-sm text-slate-400">
-            Use the controls below to experiment with variables and observe real-time dynamic behavior in your browser.
-          </p>
+      {/* Interactive Simulation Container */}
+      <section className="space-y-4 pt-2">
+        <h2 className="text-2xl font-bold text-white font-display flex items-center gap-2 border-b border-slate-800 pb-2">
+          <Sparkles className="h-5 w-5 text-cyan-400" />
+          <span>Interactive Experimentation & Simulation</span>
+        </h2>
+        <p className="text-sm text-slate-400">
+          Use the controls below to experiment with parameters in real-time.
+        </p>
 
-          {article.simulationType === "orbit" && <OrbitalMotionDemo />}
-          {article.simulationType === "projectile" && <ProjectileMotionDemo />}
-          {article.simulationType === "sorting" && <SortingVisualizerDemo />}
-        </section>
-      )}
+        {article.simulationType === "orbit" && <OrbitalMotionDemo />}
+        {article.simulationType === "solar-scale" && <SolarSystemScaleDemo />}
+        {article.simulationType === "projectile" && <ProjectileMotionDemo />}
+        {article.simulationType === "time-dilation" && <TimeDilationDemo />}
+        {article.simulationType === "pi-estimator" && <PiEstimatorDemo />}
+        {article.simulationType === "fractal" && <FractalVisualizerDemo />}
+        {article.simulationType === "sorting" && <SortingVisualizerDemo />}
+        {article.simulationType === "binary-search" && <BinarySearchDemo />}
+        {article.simulationType === "predator-prey" && <PredatorPreyDemo />}
+        {article.simulationType === "fibonacci" && <FibonacciSpiralDemo />}
+      </section>
 
-      {/* Scientific & Mathematical Model */}
+      {/* Scientific & Mathematical Formulations */}
       <section className="space-y-4">
         <h2 className="text-2xl font-bold text-white font-display flex items-center gap-2 border-b border-slate-800 pb-2">
           <Atom className="h-5 w-5 text-emerald-400" />
-          <span>Scientific & Mathematical Model</span>
+          <span>Mathematical Formulations & Equations</span>
         </h2>
         <div className="rounded-2xl bg-slate-900/60 border border-slate-800 p-6 space-y-3 font-mono text-sm text-slate-300 leading-relaxed">
-          {article.scientificModel}
+          {article.mathematicalFormulas}
         </div>
+      </section>
+
+      {/* Real-World Applications */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-white font-display flex items-center gap-2 border-b border-slate-800 pb-2">
+          <Globe className="h-5 w-5 text-blue-400" />
+          <span>Real-World Applications & Technology</span>
+        </h2>
+        <p className="text-slate-300 text-base leading-relaxed">
+          {article.realWorldApplications}
+        </p>
+      </section>
+
+      {/* Common Misconceptions */}
+      <section className="rounded-2xl bg-rose-950/20 border border-rose-500/30 p-6 space-y-3">
+        <div className="flex items-center gap-2 text-rose-400 font-bold text-sm">
+          <AlertTriangle className="h-4 w-4" />
+          <span>Common Misconceptions Debunked</span>
+        </div>
+        <p className="text-slate-300 text-sm leading-relaxed">
+          {article.commonMisconceptions}
+        </p>
       </section>
 
       {/* Key Takeaway Box */}

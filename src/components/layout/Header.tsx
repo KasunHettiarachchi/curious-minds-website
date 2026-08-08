@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { CATEGORIES } from "@/data/categories";
 import { Sparkles, Menu, X, Search, Moon, ArrowRight } from "lucide-react";
 import { cn, getBasePath } from "@/lib/utils";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -82,13 +83,8 @@ export function Header() {
             <span className="hidden sm:inline">Search...</span>
           </button>
 
-          {/* Theme Indicator */}
-          <div
-            title="Dark mode is primary"
-            className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-slate-400"
-          >
-            <Moon className="h-4 w-4 text-cyan-400" />
-          </div>
+          {/* Theme Toggle Button */}
+          <ThemeToggle />
 
           {/* Mobile Menu Button */}
           <button
