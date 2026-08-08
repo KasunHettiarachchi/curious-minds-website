@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { CATEGORIES, CATEGORY_MAP } from "@/data/categories";
+import { ARTICLES } from "@/data/articles";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { CategoryNav } from "@/components/layout/CategoryNav";
@@ -69,6 +70,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
+  const categoryArticles = ARTICLES.filter((a) => a.category === category.slug);
   const IconComponent = ICON_MAP[category.iconName] || Rocket;
 
   return (
@@ -120,77 +122,59 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <div className="flex items-center justify-between border-b border-slate-800 pb-4">
           <h2 className="text-xl font-bold text-white font-display flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-cyan-400" />
-            <span>Interactive Explanations</span>
+            <span>Interactive Explanations ({categoryArticles.length})</span>
           </h2>
           <span className="text-xs text-slate-400">
-            Showing {category.name} content
+            Showing {category.name} articles
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Link href={`/${category.slug}/`} className="group block">
-            <Card
-              accentColor={category.color}
-              className="space-y-4 h-full flex flex-col justify-between group-hover:border-slate-700/80 transition-all duration-300"
+          {categoryArticles.map((article) => (
+            <Link
+              key={article.slug}
+              href={`/${category.slug}/${article.slug}/`}
+              className="group block"
             >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <Badge categorySlug={category.slug}>{category.name}</Badge>
-                  <span className="text-xs text-slate-400 flex items-center gap-1">
-                    <PlayCircle className="h-3.5 w-3.5 text-cyan-400" /> Simulation Available
+              <Card
+                accentColor={category.color}
+                className="space-y-4 h-full flex flex-col justify-between group-hover:border-slate-700/80 transition-all duration-300"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <Badge categorySlug={category.slug}>{category.name}</Badge>
+                    <span className="text-xs text-slate-400 flex items-center gap-1">
+                      {article.hasSimulation ? (
+                        <>
+                          <PlayCircle className="h-3.5 w-3.5 text-cyan-400" /> Simulation Available
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="h-3.5 w-3.5 text-amber-400" /> Visual Guide
+                        </>
+                      )}
+                    </span>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
+                      {article.title}
+                    </h3>
+                    <p className="text-sm text-slate-400 leading-relaxed line-clamp-3">
+                      {article.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
+                  <span>{article.readTime}</span>
+                  <span className="text-cyan-400 font-medium group-hover:underline flex items-center gap-1">
+                    Explore Article →
                   </span>
                 </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
-                    Understanding {category.name}: Core Principles & Experiments
-                  </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    Step-by-step visual exploration with real-time interactive parameters. Change values and observe the behavior live.
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
-                <span>Read time: 5-8 min</span>
-                <span className="text-cyan-400 font-medium group-hover:underline flex items-center gap-1">
-                  Explore Article →
-                </span>
-              </div>
-            </Card>
-          </Link>
-
-          <Link href={`/${category.slug}/`} className="group block">
-            <Card
-              accentColor={category.color}
-              className="space-y-4 h-full flex flex-col justify-between group-hover:border-slate-700/80 transition-all duration-300"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <Badge categorySlug={category.slug}>{category.name}</Badge>
-                  <span className="text-xs text-slate-400 flex items-center gap-1">
-                    <Sparkles className="h-3.5 w-3.5 text-amber-400" /> Visual Guide
-                  </span>
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
-                    Mathematical & Physical Foundations of {category.name}
-                  </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    Intuitive mental models paired with rigorous mathematical equations rendered cleanly in KaTeX.
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
-                <span>Read time: 6 min</span>
-                <span className="text-cyan-400 font-medium group-hover:underline flex items-center gap-1">
-                  Explore Article →
-                </span>
-              </div>
-            </Card>
-          </Link>
+              </Card>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

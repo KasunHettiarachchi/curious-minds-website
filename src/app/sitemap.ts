@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { CATEGORIES } from "@/data/categories";
+import { ARTICLES } from "@/data/articles";
 
 export const dynamic = "force-static";
 
@@ -13,6 +14,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const articleEntries: MetadataRoute.Sitemap = ARTICLES.map((art) => ({
+    url: `${baseUrl}/${art.category}/${art.slug}/`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
   return [
     {
       url: `${baseUrl}/`,
@@ -21,5 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     ...categoryEntries,
+    ...articleEntries,
   ];
 }

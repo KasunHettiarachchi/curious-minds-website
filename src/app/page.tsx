@@ -151,10 +151,10 @@ export default function HomePage() {
                 Gravitational attraction pulls the Moon toward Earth continuously, yet it never collides. Through orbital mechanics, velocity, and curvature, discover how falling around the Earth creates a stable orbit.
               </p>
               <div className="flex flex-wrap gap-4 pt-2">
-                <Link href="/space/">
+                <Link href="/space/why-does-the-moon-not-fall/">
                   <Button variant="primary" size="lg" className="gap-2">
                     <PlayCircle className="h-5 w-5" />
-                    <span>Explore Space Demos</span>
+                    <span>Read Full Article &amp; Demo</span>
                   </Button>
                 </Link>
               </div>
