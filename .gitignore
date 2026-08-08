@@ -27,3 +27,7 @@ yarn-error.log*
 *.sln
 *.sw?
 .DS_Store
+
+# AI prompts
+/AGENTS.md
+/docs
