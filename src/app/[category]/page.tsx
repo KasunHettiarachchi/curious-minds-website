@@ -1,6 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { CATEGORIES, CATEGORY_MAP } from "@/data/categories";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -36,6 +37,28 @@ export async function generateStaticParams() {
   return CATEGORIES.map((cat) => ({
     category: cat.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
+  const { category: slug } = await params;
+  const category = CATEGORY_MAP[slug as CategorySlug];
+
+  if (!category) {
+    return {
+      title: "Category Not Found",
+    };
+  }
+
+  return {
+    title: `${category.name} — Interactive Explanations`,
+    description: category.description,
+    openGraph: {
+      title: `${category.name} | Curious Minds`,
+      description: category.tagline,
+    },
+  };
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
